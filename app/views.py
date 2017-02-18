@@ -20,10 +20,24 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/about/')
+@app.route('/about')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Absolutely Nothing")
+
+@app.route('/filelisting')
+def file_listing():
+    if not session.get('logged_in'):
+        abort(401)
+        
+    rootdir = os.getcwd()
+    lst = ''
+    print rootdir
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads/'):
+        for file in files:
+            print os.path.join(subdir, file)
+    str.split(lst)
+    return render_template('file_listing.html', path = lst )
 
 @app.route('/add-file', methods=['POST', 'GET'])
 def add_file():
