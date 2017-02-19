@@ -3,7 +3,13 @@
 {% block main %}
 <h1 class="page-header">File Listing</h1>
 <p>Files:</p>
-<ul>
-    <li>>>>{{ lst }}<<<</li>
-</ul>
+{% with paths = lst %}
+  {% if paths %}
+    <ul class="flashes">
+    {% for path in paths %}
+        <li>{{ path }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 {% endblock %}

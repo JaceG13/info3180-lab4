@@ -31,13 +31,12 @@ def file_listing():
         abort(401)
         
     rootdir = os.getcwd()
-    lst = ''
+    paths = []
     print rootdir
     for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads/'):
         for file in files:
-            print os.path.join(subdir, file)
-    str.split(lst)
-    return render_template('file_listing.html', path = lst )
+            paths.append(os.path.join(subdir, file))
+    return render_template('file_listing.html', lst = paths )
 
 @app.route('/add-file', methods=['POST', 'GET'])
 def add_file():
